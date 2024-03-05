@@ -1,0 +1,23 @@
+---
+version: 3
+
+build_arg_defaults:
+  EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:latest'
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '-vvv'
+
+dependencies:
+  galaxy: requirements.yml
+  python: requirements.txt
+
+additional_build_steps:
+  prepend: |
+     RUN pip3 install --upgrade pip setuptools
+     RUN dnf -y install unzip jq
+     RUN mkdir awscli && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscli/awscliv2.zip && \
+       sh -c "cd awscli; unzip awscliv2.zip && \
+       ./aws/install --update && \
+       rm awscliv2.zip && \
+       cd .. && rm -rf awscli"
+     RUN curl -L --fail "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+       --output /usr/local/bin/kubectl \
+       && chmod 0755 /usr/local/bin/kubectl
