@@ -6,7 +6,7 @@ on:
   # Triggers the workflow on push events but only for the main branch
   push:
     branches:
-      - master
+      - mugdha
     paths:
       - 'k8_ee/**'
 
@@ -20,11 +20,11 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   call-deploy-workflow:
-    uses:  amelcocloud/awx-ee/.github/workflows/deploy.yml@master
+    uses:  awx-ee/.github/workflows/deploy.yml@master
     with:
       EE_FOLDER_NAME: 'k8_ee'
       EE_IMAGE_TAG: 'latest'
       # github-actions_awx-ee IAM user
-      AWS_ACCESS_KEY_ID: AKIAV5GGD5BGD5Y6BAHV
+      AWS_ACCESS_KEY_ID: AKIA5BZYL3KE2UIBM665
     secrets:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
