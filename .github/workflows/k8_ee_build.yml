@@ -20,7 +20,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   call-deploy-workflow:
-    uses:  awx-ee/.github/workflows/deploy.yml@master
+    uses:  mugdha45/awx-ee/.github/workflows/deploy.yml@master
     with:
       EE_FOLDER_NAME: 'k8_ee'
       EE_IMAGE_TAG: 'latest'
